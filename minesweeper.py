@@ -5,7 +5,7 @@ class tile():
         self.type = type
         self.visual = visual
 
-TileASCII = ["   "," * "," F "]
+TileASCII = ["   "," * "," F ", " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 "]
 t = tile(True, " O ", "")
 TileCord = [" A "," B "," C "," D "," E "," F "," G "," H "," I "]
 board = []
@@ -28,6 +28,13 @@ def CreateBoard():
         RandTile = RandRow[RandX]
         RandTile.type = TileASCII[1]
         mines+=1
+    for X in board:
+        i=0
+        for Y in X:
+            if Y.type == TileASCII[1]:
+                if i != 0: X[i-1].type = TileASCII[3]
+                if i+1 < len(X): X[i+1].type = TileASCII[3]
+            i+=1
 
 def PrintBoard():
     ReadableBoard = board
