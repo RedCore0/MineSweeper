@@ -1,12 +1,13 @@
 import random
 class tile():
-    def __init__(self, covered, type, visual):
+    def __init__(self, covered, type, visual, MinesAround):
         self.covered = covered
         self.type = type
         self.visual = visual
+        self.MinesAround = MinesAround
 
 TileASCII = ["   "," * "," F ", " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 "]
-t = tile(True, " O ", "")
+#t = tile(True, " O ", "")
 TileCord = [" A "," B "," C "," D "," E "," F "," G "," H "," I "]
 board = []
 
@@ -16,7 +17,7 @@ def CreateBoard():
         row = [] 
         x = 0
         while x < 9:
-            row.append(tile(True, " - ", ""))
+            row.append(tile(True, " - ", "", 3))
             x+=1
         board.append(row)
         y+=1
@@ -32,8 +33,12 @@ def CreateBoard():
         i=0
         for Y in X:
             if Y.type == TileASCII[1]:
-                if i != 0: X[i-1].type = TileASCII[3]
-                if i+1 < len(X): X[i+1].type = TileASCII[3]
+                if i != 0:
+                    X[i-1].type = TileASCII[X[i-1].MinesAround]
+                    X[i-1].MinesAround += 1 
+                if i+1 < len(X):
+                     X[i+1].type = TileASCII[X[i+1].MinesAround]
+                     X[i+1].MinesAround += 1 
             i+=1
 
 def PrintBoard():
