@@ -1,0 +1,3 @@
+michal        Beginner       225
+ Michal        Intermediate       988
+ 
